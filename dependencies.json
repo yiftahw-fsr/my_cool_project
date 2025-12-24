@@ -1,0 +1,6 @@
+{
+    "my_cool_package": {
+        "url": "https://github.com/yiftahw-fsr/my_cool_package.git",
+        "ref": "v1.0.0"
+    }
+}
