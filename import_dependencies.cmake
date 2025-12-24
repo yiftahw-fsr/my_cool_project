@@ -49,6 +49,7 @@ macro(import_dependency package_name)
     # Read package info from JSON
     string(JSON package_url GET ${deps_content} ${package_name} url)
     string(JSON package_ref GET ${deps_content} ${package_name} ref)
+    string(JSON package_targets GET ${deps_content} ${package_name} target)
     
     # Fetch the dependency
     FetchContent_Declare(
@@ -76,11 +77,13 @@ macro(import_dependency package_name)
     string(APPEND lock_entries "    \"${package_name}\": {\n")
     string(APPEND lock_entries "        \"url\": \"${package_url}\",\n")
     string(APPEND lock_entries "        \"ref\": \"${package_ref}\",\n")
-    string(APPEND lock_entries "        \"commit\": \"${package_commit_hash}\"\n")
+    string(APPEND lock_entries "        \"commit\": \"${package_commit_hash}\",\n")
+    string(APPEND lock_entries "        \"target\": \"${package_targets}\"\n")
     string(APPEND lock_entries "    }")
     
-    # Add to dependencies list
-    list(APPEND IMPORTED_DEPENDENCIES ${package_name})
+    # Add targets to dependencies list (space-separated targets)
+    string(REPLACE " " ";" target_list "${package_targets}")
+    list(APPEND IMPORTED_DEPENDENCIES ${target_list})
 endmacro()
 
 # Helper macro to dump the lock file content
@@ -98,3 +101,6 @@ endforeach()
 
 # Write lock file
 dump_lock_content()
+
+message(STATUS "Lock file written to: ${lock_file}")
+message(STATUS "Imported dependencies: ${IMPORTED_DEPENDENCIES}")

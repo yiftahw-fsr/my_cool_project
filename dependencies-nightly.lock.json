@@ -1,0 +1,14 @@
+{
+    "magic_enum": {
+        "url": "https://github.com/Neargye/magic_enum.git",
+        "ref": "v0.9.7",
+        "commit": "e046b69a3736d314fad813e159b1c192eaef92cd",
+        "target": "magic_enum::magic_enum"
+    },
+    "my_cool_package": {
+        "url": "https://github.com/yiftahw-fsr/my_cool_package.git",
+        "ref": "main",
+        "commit": "3d7a467c5e6a168a5469e573648ddeb22c7a418c",
+        "target": "my_cool_package"
+    }
+}

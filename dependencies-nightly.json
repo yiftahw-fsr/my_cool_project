@@ -1,10 +1,10 @@
 {
     "my_cool_package": {
         "url": "https://github.com/yiftahw-fsr/my_cool_package.git",
-        "ref": "v1.0.0",
+        "ref": "main",
         "target": "my_cool_package"
     },
-    "magic_enum":{
+        "magic_enum":{
         "url": "https://github.com/Neargye/magic_enum.git",
         "ref": "v0.9.7",
         "target": "magic_enum::magic_enum"
