@@ -1,4 +1,5 @@
 {
+  "extends": ["config:recommended"],
   "customManagers": [
     {
       "customType": "jsonata",
