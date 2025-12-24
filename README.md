@@ -67,19 +67,22 @@ Example lock file:
 }
 ```
 
-#### 3. Build Flavor Support
+#### 3. Multiple Dependency Files Support
 
-The system supports multiple build flavors for different dependency configurations (e.g., stable vs. nightly builds):
+The system supports using different dependency files for different configurations (e.g., stable vs. nightly builds):
 
 ```bash
 # Use default dependencies.json
 cmake -S . -B build
 
 # Use dependencies-nightly.json and generate dependencies-nightly-lock.json
-cmake -S . -B build -DBUILD_FLAVOR=nightly
+cmake -S . -B build -DDEPS_FILE=dependencies-nightly.json
+
+# Use any custom dependency file
+cmake -S . -B build -DDEPS_FILE=dependencies-experimental.json
 ```
 
-The `BUILD_FLAVOR` variable is intentionally **not cached**, so you can switch between flavors cleanly without cache pollution.
+The `DEPS_FILE` variable is intentionally **not cached**, so you can switch between configurations cleanly without cache pollution. The lock file name is automatically derived by replacing `.json` with `-lock.json`.
 
 #### 4. Under the Hood
 

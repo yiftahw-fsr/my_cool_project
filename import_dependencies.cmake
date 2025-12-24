@@ -1,25 +1,21 @@
 include(FetchContent)
 
-# Set default BUILD_FLAVOR to empty if not provided (as a regular variable, not cached)
-# If BUILD_FLAVOR is provided via -D, store it as a normal variable to avoid caching issues
-# Then unset any cached BUILD_FLAVOR to ensure clean state
-if(NOT DEFINED BUILD_FLAVOR)
-    set(BUILD_FLAVOR "")
+# Set default DEPS_FILE to dependencies.json if not provided (as a regular variable, not cached)
+if(NOT DEFINED DEPS_FILE)
+    set(DEPS_FILE "dependencies.json")
 else()
-    set(BUILD_FLAVOR "${BUILD_FLAVOR}")
+    set(DEPS_FILE "${DEPS_FILE}")
 endif()
-unset(BUILD_FLAVOR CACHE)
+unset(DEPS_FILE CACHE)
 
-# Determine the build flavor and set up file paths
-if(BUILD_FLAVOR STREQUAL "")
-    message(STATUS "Using default dependencies.json for imports")
-    set(deps_file "${CMAKE_CURRENT_SOURCE_DIR}/dependencies.json")
-    set(lock_file "${CMAKE_CURRENT_SOURCE_DIR}/dependencies.lock.json")
-else()
-    message(STATUS "Using dependencies-${BUILD_FLAVOR}.json for imports")
-    set(deps_file "${CMAKE_CURRENT_SOURCE_DIR}/dependencies-${BUILD_FLAVOR}.json")
-    set(lock_file "${CMAKE_CURRENT_SOURCE_DIR}/dependencies-${BUILD_FLAVOR}.lock.json")
-endif()
+# Set up file paths
+set(deps_file "${CMAKE_CURRENT_SOURCE_DIR}/${DEPS_FILE}")
+
+# Generate lock file name by replacing .json extension with .lock.json
+string(REGEX REPLACE "\\.json$" ".lock.json" LOCK_FILE "${DEPS_FILE}")
+set(lock_file "${CMAKE_CURRENT_SOURCE_DIR}/${LOCK_FILE}")
+
+message(STATUS "Using ${DEPS_FILE} for imports, will generate ${LOCK_FILE}")
 
 # assert that deps_file exists
 if(NOT EXISTS ${deps_file})
