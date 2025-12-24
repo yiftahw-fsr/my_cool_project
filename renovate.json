@@ -1,0 +1,14 @@
+{
+  "customManagers": [
+    {
+      "customType": "jsonata",
+      "fileFormat": "json",
+      "managerFilePatterns": ["/dependencies\\.json/"],
+      "matchStrings": [
+        "$each(function($v, $n) { { \"depName\": $n, \"currentValue\": $v.ref, \"packageName\": $v.url } })"
+      ],
+      "datasourceTemplate": "git-tags",
+      "versioningTemplate": "semver"
+    }
+  ]
+}

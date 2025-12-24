@@ -1,0 +1,15 @@
+name: Renovate Bot
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.1
+      
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v44.2.0
+        with:
+          docker-cmd-file: .github/renovate-entrypoint.sh
+          docker-user: root
+          token: ${{ secrets.RENOVATE_TOKEN }}
