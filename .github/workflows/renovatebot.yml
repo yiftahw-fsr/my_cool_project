@@ -1,5 +1,10 @@
 name: Renovate Bot
 
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight
+  workflow_dispatch:
+
 jobs:
   renovate:
     runs-on: ubuntu-latest
