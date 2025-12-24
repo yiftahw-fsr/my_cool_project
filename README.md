@@ -31,16 +31,17 @@ Dependencies are declared in `dependencies.json` with a simple structure:
 ```
 
 **Fields:**
+
 - `url`: Git repository URL
 - `ref`: Git tag, branch, or commit to fetch
 - `target`: CMake target(s) to link against (space-separated for multiple targets from one repo)
-```
 
 **The system is completely agnostic to the actual set of packages** - it automatically discovers all packages from the JSON file and imports them without any manual configuration in CMake files.
 
 #### 2. Automatic Lock File Generation
 
 During CMake configuration, `import_dependencies.cmake` generates a lock file (e.g., `dependencies-lock.json`) that captures:
+
 - The exact commit hash checked out for each dependency
 - The URL and ref that were specified
 - A complete bill of materials for reproducibility
@@ -48,6 +49,7 @@ During CMake configuration, `import_dependencies.cmake` generates a lock file (e
 **Lock files should be checked into version control** for traceability and to ensure reproducible builds across different environments and time periods.
 
 Example lock file:
+
 ```json
 {
     "my_cool_package": {
