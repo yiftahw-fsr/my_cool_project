@@ -23,3 +23,5 @@ jobs:
           docker-cmd-file: .github/renovate-entrypoint.sh
           docker-user: root
           token: ${{ secrets.RENOVATE_TOKEN }}
+        env:
+          LOG_LEVEL: 'debug'
