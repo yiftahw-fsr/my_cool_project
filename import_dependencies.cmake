@@ -31,6 +31,15 @@ endif()
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${deps_file})
 file(READ ${deps_file} deps_content)
 
+# Extract all package keys from the JSON using CMake's JSON support
+string(JSON package_count LENGTH ${deps_content})
+set(package_names "")
+math(EXPR last_index "${package_count} - 1")
+foreach(index RANGE ${last_index})
+    string(JSON package_name MEMBER ${deps_content} ${index})
+    list(APPEND package_names ${package_name})
+endforeach()
+
 # Initialize lock file content and dependencies list
 set(lock_entries "")
 set(IMPORTED_DEPENDENCIES "")
@@ -83,7 +92,9 @@ macro(dump_lock_content)
 endmacro()
 
 # Import dependencies
-import_dependency(my_cool_package)
+foreach(package_name ${package_names})
+    import_dependency(${package_name})
+endforeach()
 
 # Write lock file
 dump_lock_content()
