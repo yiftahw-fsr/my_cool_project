@@ -1,6 +1,6 @@
 {
   "platform": "github",
-  "respositories": ["yiftahw-fsr/my_cool_project"],
+  "repositories": ["yiftahw-fsr/my_cool_project"],
   "customManagers": [
     {
       "customType": "jsonata",
